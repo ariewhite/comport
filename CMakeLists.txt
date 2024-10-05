@@ -22,7 +22,6 @@ qt_add_executable(terminal
     settingsdialog.cpp settingsdialog.h settingsdialog.ui
 
     displaywindow.cpp displaywindow.h displaywindow.ui
-    #connectwindow.cpp connectwindow.h connectwindow.ui
     reader.cpp reader.h
 )
 
