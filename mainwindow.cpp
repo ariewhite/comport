@@ -112,6 +112,7 @@ void MainWindow::about()
 void MainWindow::writeData(const QByteArray &data)
 {
     const qint64 written = m_serial->write(data);
+    qDebug() << "data writed: " << data;
     if (written == data.size()) {
         m_bytesToWrite += written;
         m_timer->start(kWriteTimeout);
@@ -182,8 +183,11 @@ void MainWindow::showWriteError(const QString &message)
 
 void MainWindow::on_actionDisplay_triggered()
 {
+    // создаем экземпляр класса для просмотра данных из порта
     dp = new DisplayWindow(m_serial);
-
+    // показываем его
     dp->show();
+    // устанавливаем название
+    dp->setWindowTitle("Port reader");
 }
 

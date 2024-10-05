@@ -3,44 +3,65 @@
 
 DisplayWindow::DisplayWindow(QSerialPort *sp, QWidget *parent) :
     QWidget(parent),
-    m_serial(sp),
-    console(new Console(this)),
+    m_serial(new QSerialPort),
+    m_console(new Console(this)),
     m_read(new Reader(m_serial, this)),
+    m_settings(new SettingsDialog(this)),
     ui(new Ui::DisplayWindow)
 {
+    // отображаем консоль
     ui->setupUi(this);
-    ui->vertLay->addWidget(console);
-    console->setEnabled(false);
-    console->show();
+    ui->vertLay->addWidget(m_console);
+    m_console->setEnabled(false);
+    m_console->show();
+    ui->connectBtn->setEnabled(false);
 
-    m_read->start();
-
+    // связываем получения данных из класса и печать их на консоль
     connect(m_read, &Reader::dataReady, this, &DisplayWindow::handleReadyData);
 }
 
 DisplayWindow::~DisplayWindow()
 {
     delete ui;
-    m_read->requestInterruption();
-    m_read->wait();
+    //закрываем связь с портом
+    if(m_serial->isOpen()){
+        m_serial->close();
+    }
+
 }
 
-void DisplayWindow::readSP()
-{
-    const QByteArray data = m_serial->readAll();
-    //qDebug() << data;
-    console->putData(data);
-}
-
-void DisplayWindow::on_pushButton_clicked()
-{
-
-    //QByteArray data = readSP();
-    //ui->textEdit->insertPlainText(QString(data));
-}
 
 void DisplayWindow::handleReadyData(const QByteArray &data)
 {
-    console->putData(data);
+    m_console->putData(data);
+}
+
+
+void DisplayWindow::on_settingsBtn_clicked()
+{
+    m_settings->show();
+    ui->connectBtn->setEnabled(true);
+}
+
+
+void DisplayWindow::on_connectBtn_clicked()
+{
+    // вытаскиваем данные из настроек
+    const SettingsDialog::Settings p = m_settings->settings();
+    m_serial->setPortName(p.name);
+    m_serial->setBaudRate(p.baudRate);
+    m_serial->setDataBits(p.dataBits);
+    m_serial->setParity(p.parity);
+    m_serial->setStopBits(p.stopBits);
+    m_serial->setFlowControl(p.flowControl);
+
+    // пробуем подключиться
+    if (m_serial->open(QIODevice::ReadOnly)) {
+        m_console->setEnabled(false);
+    } else {
+        QMessageBox::critical(this, tr("Error"), m_serial->errorString());
+    }
+
+    qDebug() << "Сonnected to " << m_serial->portName();
 }
 

@@ -13,11 +13,20 @@ public:
     ~Reader();
 
 protected:
+    /*
+     * намек на многопоточность я оставил, но qtшные функции асинхронны,
+     * так что они(потоки) здесь особо и не нужны.
+     */
     void run() override;
 
 signals:
     void dataReady(const QByteArray &data);
 
+private:
+    /*
+     * функция чтения данных из порта
+     */
+    void readData();
 private:
     QSerialPort *m_serial;
 };

@@ -58,6 +58,7 @@ private:
     qint64 m_bytesToWrite = 0;
     QTimer *m_timer = nullptr;
     QSerialPort *m_serial = nullptr;
+    QSerialPort *m_serial_read = nullptr;
     DisplayWindow *dp = nullptr;
 };
 

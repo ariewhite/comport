@@ -20,7 +20,9 @@ qt_add_executable(terminal
     main.cpp
     mainwindow.cpp mainwindow.h mainwindow.ui
     settingsdialog.cpp settingsdialog.h settingsdialog.ui
+
     displaywindow.cpp displaywindow.h displaywindow.ui
+    #connectwindow.cpp connectwindow.h connectwindow.ui
     reader.cpp reader.h
 )
 
@@ -43,6 +45,7 @@ set(terminal_resource_files
     "images/connect.png"
     "images/disconnect.png"
     "images/settings.png"
+    # добавляем иконку для новой кнопки
     "images/terminal.png"
 )
 

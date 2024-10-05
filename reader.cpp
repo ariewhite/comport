@@ -4,11 +4,10 @@ Reader::Reader(QSerialPort *sp, QObject *parent) :
     QThread(parent),
     m_serial(sp)
 {
-
+    connect(m_serial, &QSerialPort::readyRead, this, &Reader::readData);
 }
 Reader::~Reader()
 {
-
 }
 
 void Reader::run()
@@ -20,5 +19,11 @@ void Reader::run()
             emit dataReady(data);
         }
     }
+}
+
+void Reader::readData()
+{
+    const QByteArray data = m_serial->readAll();
+    emit dataReady(data);
 }
 
