@@ -20,6 +20,7 @@ DisplayWindow::DisplayWindow(QSerialPort *sp, QWidget *parent) :
     connect(m_read, &Reader::dataReady, this, &DisplayWindow::handleReadyData);
 }
 
+
 DisplayWindow::~DisplayWindow()
 {
     delete ui;
@@ -28,6 +29,9 @@ DisplayWindow::~DisplayWindow()
         m_serial->close();
     }
 
+    delete m_settings;
+    delete m_read;
+    delete m_console;
 }
 
 

@@ -6,9 +6,8 @@ Reader::Reader(QSerialPort *sp, QObject *parent) :
 {
     connect(m_serial, &QSerialPort::readyRead, this, &Reader::readData);
 }
-Reader::~Reader()
-{
-}
+Reader::~Reader(){}
+
 
 void Reader::run()
 {
@@ -20,6 +19,7 @@ void Reader::run()
         }
     }
 }
+
 
 void Reader::readData()
 {
