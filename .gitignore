@@ -1,1 +1,4 @@
 /build
+connectwindow.cpp
+connectwindow.ui 
+connectwindow.h
