@@ -9,7 +9,7 @@
 ![Ports](resource/ports.png)
 
 ### Работа программы
-![Demo](https://www.dropbox.com/scl/fi/0sp38685efcph8a8jmpop/2.gif?rlkey=zvzbh5eumr96cqh85ve3xl2jl&st=su3nkap2&raw=1)
+![Demo](resorce/demo.gif)
 
 
 Если гиф не проигрывается
