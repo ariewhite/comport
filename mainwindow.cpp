@@ -117,6 +117,7 @@ void MainWindow::writeData(const QByteArray &data)
     if (written == data.size()) {
         m_bytesToWrite += written;
         m_timer->start(kWriteTimeout);
+        m_console->setEnabled(false);
     } else {
         const QString error = tr("Failed to write all data to port %1.\n"
                                  "Error: %2").arg(m_serial->portName(),
@@ -142,6 +143,8 @@ void MainWindow::readData()
         m_console->putData(data);
         showStatusMessage(tr("Data accepted! Wrong data.."));
     }
+
+    m_console->setEnabled(true);
 }
 //! [7]
 
