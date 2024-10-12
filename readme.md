@@ -9,5 +9,5 @@
 ![Ports](resource/ports.png)
 
 ### Работа программы
-![Demo](resource/demo.mp4)
+![Demo](https://www.dropbox.com/scl/fi/0sp38685efcph8a8jmpop/2.gif?raw=1)
 
