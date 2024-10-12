@@ -9,7 +9,7 @@
 ![Ports](resource/ports.png)
 
 ### Работа программы
-![Demo](resorce/demo.gif)
+![Demo](resource/demo.gif)
 
 
 Если гиф не проигрывается
